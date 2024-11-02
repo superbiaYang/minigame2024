@@ -1,11 +1,13 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using Mirror;
 public class Weapon : NetworkBehaviour
 {
     public BulletController m_Bullet;
     public int m_Damage = 10;
     public int m_FireIntervalSecs = 2;
+    public int m_Level = 1;
     private TimeSpan m_FireInterval;
     private DateTime m_LastFireTime = DateTime.MinValue;
 
@@ -72,8 +74,17 @@ public class Weapon : NetworkBehaviour
         if (currentTime - m_LastFireTime >= m_FireInterval)
         {
             m_LastFireTime = currentTime;
+            for (int i = 0; i < m_Level; i++) 
+            {
+                StartCoroutine(FireBullet(0.1f * i, m_Target));
+            }
+        }
+
+        IEnumerator FireBullet(float secs, IWeaponTargetable target)
+        {
+            yield return new WaitForSeconds(secs);
             var bullet = Instantiate(m_Bullet, transform.position, transform.rotation);
-            bullet.Target = m_Target;
+            bullet.Target = target;
             bullet.Damage = m_Damage;
             NetworkServer.Spawn(bullet.gameObject);
         }

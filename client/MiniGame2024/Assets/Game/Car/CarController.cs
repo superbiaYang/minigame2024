@@ -3,6 +3,8 @@ using Mirror;
 
 public class CarController : NetworkBehaviour, IWeaponTargetable
 {
+    public Weapon m_Weapon;
+    public CircularBulletController m_CircularBullet;
     public delegate void LocalPlayerSpawnedHandler(GameObject player);
     public static event LocalPlayerSpawnedHandler OnLocalPlayerSpawned;
     public int m_Type = 1;
@@ -27,6 +29,8 @@ public class CarController : NetworkBehaviour, IWeaponTargetable
     private Rigidbody2D m_Rigidbody;
     private CarModel m_CarModel;
     private CarHudController m_HudController;
+    private BloodHud m_BloodHud;
+    private GameResult m_GameResult;
     private GameManager m_GameManager;
 
     void Awake()
@@ -38,6 +42,9 @@ public class CarController : NetworkBehaviour, IWeaponTargetable
         if (!isServer)
         {
             m_HudController = FindObjectOfType<CarHudController>();
+            m_BloodHud = FindObjectOfType<BloodHud>();
+            m_GameResult = FindObjectOfType<GameResult>();
+            m_GameResult.HideResult();
         }
     }
 
@@ -191,10 +198,15 @@ public class CarController : NetworkBehaviour, IWeaponTargetable
         while (m_CarModel.Mass > Config.Instance.m_Vehicle.GetNextLevelRequiredMass(m_Type, m_CarModel.Level))
         {
             m_CarModel.Level++;
+            var bullet = Instantiate(m_CircularBullet, transform.position, transform.rotation);
+            bullet.m_Radius = GetComponent<Renderer>().bounds.size.y / 2 + 100;
+            bullet.m_CenterPoint = transform;
+            NetworkServer.Spawn(bullet.gameObject);
             levelup = true;
         }
         if (levelup)
         {
+            m_Weapon.m_Level = m_CarModel.Level;
             UpdateProperty();
         }
     }
@@ -228,6 +240,18 @@ public class CarController : NetworkBehaviour, IWeaponTargetable
     private void RpcCarDestoryed()
     {
         gameObject.SetActive(false);
+        m_GameResult.ShowResult(false);
+    }
+
+    [ClientRpc]
+    public void RpcWin()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+        gameObject.SetActive(false);
+        m_GameResult.ShowResult(true);
     }
 
     [ClientRpc]
@@ -243,6 +267,10 @@ public class CarController : NetworkBehaviour, IWeaponTargetable
         if (!isLocalPlayer)
         {
             return;
+        }
+        if (m_BloodHud)
+        {
+            m_BloodHud.UpdateBloodBar(m_CarModel.Hp, m_CarModel.MaxHp);
         }
         if (!m_HudController)
         {

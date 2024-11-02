@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using Mirror;
 
@@ -14,6 +15,7 @@ public enum GameStatus
 public class GameManager : NetworkBehaviour
 {
     public SafeZoneController m_SafeZone;
+    public Text m_GameResult;
 
     [SyncVar]
     public GameStatus m_Status;
@@ -132,6 +134,13 @@ public class GameManager : NetworkBehaviour
     {
         m_Status = GameStatus.GameOver;
         Debug.Log("game over");
+        foreach(var car in m_Cars)
+        {
+            if (car.IsAlive())
+            {
+                car.RpcWin();
+            }
+        }
         RpcGameOver();
         m_Status = GameStatus.Pending;
     }

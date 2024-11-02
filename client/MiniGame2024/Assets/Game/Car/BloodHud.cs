@@ -5,13 +5,22 @@ public class BloodHud : MonoBehaviour
 {
     public Slider m_BloodBar;
 
-    void Update()
+    public void Start()
     {
-        UpdateBloodBar(Random.Range(0,100), 100);
+        if (m_BloodBar)
+        {
+            m_BloodBar.maxValue = 1;
+            m_BloodBar.value = 1;
+        }
     }
 
     public void UpdateBloodBar(int curHp, int maxHp)
     {
+        if (maxHp == 0)
+        {
+            m_BloodBar.value = 1;
+            return;
+        }
         if (m_BloodBar != null)
         {
             m_BloodBar.value = (float)curHp / maxHp;
