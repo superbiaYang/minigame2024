@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mirror", "Mirror", "{8D9020B4-6F00-4C82-85EB-50A8EEBB1F0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{224144F1-F81D-4F4D-86B9-9B892D33916E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Editor", "Editor", "{FE6B5DFC-97F6-4948-9C8D-925057C8E848}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = ".WeaverTests", "Mirror\Tests\Editor\Weaver\.WeaverTests.csproj", "{B9CDEB74-385F-4408-A0F8-FE059871FBA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9CDEB74-385F-4408-A0F8-FE059871FBA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9CDEB74-385F-4408-A0F8-FE059871FBA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9CDEB74-385F-4408-A0F8-FE059871FBA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9CDEB74-385F-4408-A0F8-FE059871FBA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{224144F1-F81D-4F4D-86B9-9B892D33916E} = {8D9020B4-6F00-4C82-85EB-50A8EEBB1F0F}
+		{FE6B5DFC-97F6-4948-9C8D-925057C8E848} = {224144F1-F81D-4F4D-86B9-9B892D33916E}
+		{B9CDEB74-385F-4408-A0F8-FE059871FBA2} = {FE6B5DFC-97F6-4948-9C8D-925057C8E848}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40B57FCC-08CB-421F-9A13-BCD5E8E8029D}
+	EndGlobalSection
+EndGlobal

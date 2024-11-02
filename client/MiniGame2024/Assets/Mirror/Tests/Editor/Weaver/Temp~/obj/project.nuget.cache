@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ylWNcQO5EOkeObkjlMHvxohfNcQUDZJd+/ucLJC/XfpauFjEXxchAn2v5y9aPAPB/wLWb0K5TGVydz9eg852hA==",
+  "success": true,
+  "projectFilePath": "D:\\git\\minigame2024\\client\\MiniGame2024\\Assets\\Mirror\\Tests\\Editor\\Weaver\\.WeaverTests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\haoming.yang\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\haoming.yang\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
